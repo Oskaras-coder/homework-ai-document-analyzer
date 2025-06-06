@@ -1,0 +1,44 @@
+{
+    "docs": [
+        {
+            "page_content": "PDF Test File\nCongratulations, your computer is equipped with a PDF (Portable Document Format)\nreader! You should be able to view any of the PDF documents and forms available on\nour site. PDF forms are indicated by these icons: or .\nYukon Department of Education\nBox 2703\nWhitehorse,Yukon\nCanada\nY1A 2C6\nPlease visit our website at: http://www.education.gov.yk.ca/",
+            "metadata": {
+                "page": 0
+            }
+        }
+    ],
+    "retriever": "tags=['FAISS', 'OpenAIEmbeddings'] vectorstore=<langchain_community.vectorstores.faiss.FAISS object at 0x00000293ABAF2550> search_kwargs={}",
+    "summary": {
+        "input_documents": [
+            {
+                "page_content": "PDF Test File\nCongratulations, your computer is equipped with a PDF (Portable Document Format)\nreader! You should be able to view any of the PDF documents and forms available on\nour site. PDF forms are indicated by these icons: or .\nYukon Department of Education\nBox 2703\nWhitehorse,Yukon\nCanada\nY1A 2C6\nPlease visit our website at: http://www.education.gov.yk.ca/",
+                "metadata": {
+                    "page": 0
+                }
+            }
+        ],
+        "output_text": "The document is a PDF test file informing the reader that their computer has a PDF reader and provides instructions on how to view PDF documents on the Yukon Department of Education website. It also includes the website address for additional information."
+    },
+    "qa": {
+        "What’s the company’s purpose and main activities?": {
+            "query": "What’s the company’s purpose and main activities?",
+            "result": "I don't have specific information about the company's purpose and main activities based on the context provided. You may need to visit the website mentioned (http://www.education.gov.yk.ca/) to find detailed information about the Yukon Department of Education's purpose and main activities."
+        },
+        "What’s the company’s primary focus?": {
+            "query": "What’s the company’s primary focus?",
+            "result": "The primary focus of the company mentioned in the context is the Yukon Department of Education, located in Whitehorse, Yukon, Canada. Their main focus is on education and providing educational resources and services."
+        },
+        "What’s the company’s commitment for Risk Management?": {
+            "query": "What’s the company’s commitment for Risk Management?",
+            "result": "I don't have that specific information. It would be best to visit the company's website or contact them directly to inquire about their commitment to risk management."
+        },
+        "What’s the company’s commitment for Energy Management?": {
+            "query": "What’s the company’s commitment for Energy Management?",
+            "result": "I don't have that specific information. You may want to visit the company's website at http://www.education.gov.yk.ca/ to find details about their commitment to Energy Management."
+        },
+        "What’s the company’s commitment for Data Security?": {
+            "query": "What’s the company’s commitment for Data Security?",
+            "result": "I don't have that specific information. It would be best to visit the company's website at http://www.education.gov.yk.ca/ to find details about their commitment to data security."
+        }
+    }
+}
