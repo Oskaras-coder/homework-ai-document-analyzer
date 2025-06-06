@@ -1,6 +1,6 @@
 from langchain.chains import RetrievalQA
-from questions import QUESTIONS
-from llm import get_llm  # ✅ import the shared LLM
+from core.questions import QUESTIONS
+from core.llm import get_llm
 
 def qa_node(state):
     llm = get_llm(temperature=0)  # lower temperature for factual QA

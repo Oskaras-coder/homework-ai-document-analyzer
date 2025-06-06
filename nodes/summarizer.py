@@ -1,6 +1,6 @@
 from langchain.chains.summarize import load_summarize_chain
-from llm import get_llm
-from text_splitter import split_documents
+from core.llm import get_llm
+from core.text_splitter import split_documents
 
 def summarize_node(state):
     docs = state["docs"]

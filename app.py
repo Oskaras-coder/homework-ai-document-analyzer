@@ -2,7 +2,7 @@ import json
 import os
 import streamlit as st
 from main import process_document
-from utils import get_file_hash
+from utils.utils import get_file_hash
 
 st.set_page_config(page_title="AI Document Analyzer", layout="wide")
 st.title("📄 AI-Powered Document Analyzer (LangChain + LangGraph + RAG)")

@@ -1,8 +1,8 @@
 from langgraph.graph import StateGraph
 from typing import TypedDict, List, Dict
 from langchain.schema import Document
-from summarizer import summarize_node
-from qa import qa_node
+from nodes.summarizer import summarize_node
+from nodes.qa import qa_node
 
 class GraphState(TypedDict):
     docs: List[Document]
@@ -10,7 +10,6 @@ class GraphState(TypedDict):
     summary: str
     qa: Dict[str, str]
 
-# ✅ Step 2: Build the LangGraph with the schema
 def build_graph():
     builder = StateGraph(GraphState)
 

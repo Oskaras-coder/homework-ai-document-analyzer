@@ -1,9 +1,8 @@
 import os
 import json
-from utils import get_file_hash
-from loader import load_and_split
-from embedder import create_vectorstore
-from graph import build_graph
+from core.embedder import create_vectorstore
+from core.graph import build_graph
+from core.loader import load_and_split
 
 def make_json_safe(obj):
     if isinstance(obj, dict):
@@ -21,7 +20,6 @@ def make_json_safe(obj):
         return obj
     
 def process_document(file, json_path, on_progress=None):
-    # Step 3: Process the document
     if on_progress: on_progress(10, "📄 Splitting document...")
     docs = load_and_split(file)
 
