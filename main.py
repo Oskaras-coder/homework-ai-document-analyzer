@@ -1,45 +1,52 @@
 import os
 import json
+from core.loader import load_and_split
 from core.embedder import create_vectorstore
 from core.graph import build_graph
-from core.loader import load_and_split
+from utils.serialization import make_json_safe
+from utils.constants import (
+    MSG_SPLITTING,
+    MSG_CREATING_VECTORSTORE,
+    MSG_RUNNING_GRAPH,
+    MSG_SAVING_RESULT,
+    MSG_DONE,
+)
 
-def make_json_safe(obj):
-    if isinstance(obj, dict):
-        return {str(k): make_json_safe(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [make_json_safe(i) for i in obj]
-    elif hasattr(obj, 'page_content'):
-        return {
-            "page_content": obj.page_content,
-            "metadata": obj.metadata
-        }
-    elif hasattr(obj, '__dict__'):
-        return str(obj)
-    else:
-        return obj
-    
+
 def process_document(file, json_path, on_progress=None):
-    if on_progress: on_progress(10, "📄 Splitting document...")
-    docs = load_and_split(file)
+    docs = _prepare_documents(file, on_progress)
+    retriever = _prepare_retriever(docs, on_progress)
+    result = _run_pipeline(docs, retriever, on_progress)
+    _save_result(result, json_path, on_progress)
+    return result["summary"], result["qa"]
 
-    if on_progress: on_progress(30, "📌 Creating vectorstore...")
+
+def _prepare_documents(file, on_progress):
+    if on_progress:
+        on_progress(10, MSG_SPLITTING)
+    return load_and_split(file)
+
+
+def _prepare_retriever(docs, on_progress):
+    if on_progress:
+        on_progress(30, MSG_CREATING_VECTORSTORE)
     vectorstore = create_vectorstore(docs)
-    retriever = vectorstore.as_retriever()
+    return vectorstore.as_retriever()
 
-    if on_progress: on_progress(60, "🤖 Running graph inference...")
+
+def _run_pipeline(docs, retriever, on_progress):
+    if on_progress:
+        on_progress(60, MSG_RUNNING_GRAPH)
     graph = build_graph()
-    result = graph.invoke({
-        "docs": docs,
-        "retriever": retriever
-    })
+    return graph.invoke({"docs": docs, "retriever": retriever})
 
-    if on_progress: on_progress(90, "💾 Saving result...")
-    
+
+def _save_result(result, json_path, on_progress):
+    if on_progress:
+        on_progress(90, MSG_SAVING_RESULT)
     safe_result = make_json_safe(result)
     os.makedirs("results", exist_ok=True)
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(safe_result, f, ensure_ascii=False, indent=4)
-
-    if on_progress: on_progress(100, "✅ Done")
-    return result["summary"], result["qa"]
+    if on_progress:
+        on_progress(100, MSG_DONE)

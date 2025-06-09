@@ -1,5 +1,6 @@
 streamlit>=1.28
 langchain-openai
+langchain-ollama
 openai>=1.2
 langgraph>=0.0.38
 pdfplumber>=0.10.2,<1.0
@@ -9,3 +10,4 @@ streamlit-feedback
 langchain-community
 faiss-cpu
 pymupdf
+sentence-transformers

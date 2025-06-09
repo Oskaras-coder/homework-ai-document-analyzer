@@ -4,11 +4,13 @@ from langchain.schema import Document
 from nodes.summarizer import summarize_node
 from nodes.qa import qa_node
 
+
 class GraphState(TypedDict):
     docs: List[Document]
     retriever: any
     summary: str
     qa: Dict[str, str]
+
 
 def build_graph():
     builder = StateGraph(GraphState)

@@ -1,5 +1,6 @@
 import hashlib
 
+
 def get_file_hash(file):
     file.seek(0)
     content = file.read()

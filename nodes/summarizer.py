@@ -1,11 +1,11 @@
 from langchain.chains.summarize import load_summarize_chain
 from core.llm import get_llm
-from core.text_splitter import split_documents
+from utils.constants import OPENAI_MODEL_NAME
+
 
 def summarize_node(state):
     docs = state["docs"]
-    split_docs = split_documents(docs)
-    llm = get_llm(temperature=0.3)
+    llm = get_llm(temperature=0, model_name=OPENAI_MODEL_NAME)
     chain = load_summarize_chain(llm, chain_type="map_reduce")
-    summary = chain.invoke(split_docs)
+    summary = chain.invoke(docs)
     return {"summary": summary, "retriever": state["retriever"]}
