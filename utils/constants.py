@@ -19,7 +19,7 @@ OPEN_AI_TITLE = (
 )
 OLLAMA_TITLE = "💡 Model used: **Ollama Mistral** (local build via Ollama)"
 
-# File Types
+# Allowed ile Types
 FILE_TYPES = ["pdf"]
 
 # Section Headers

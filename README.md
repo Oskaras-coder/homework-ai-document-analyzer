@@ -6,7 +6,7 @@ This project allows you to upload and analyze long PDF documents using either Op
 
 ## Features
 
-- Summarizes complex documents
+- Summarizes complex PDF documents
 - Answers predefined questions based on document content
 - Switches between OpenAI and local Ollama model
 - Caches results for faster re-use
@@ -120,10 +120,48 @@ pytest test_app.py
 - Summary and QA generation speed Based on provided dataset:
   - Tallink Grupp Sustainability Reports
     - OPENAI GPT-3.5 Turbo - ~4 - 5 mins
-    - Ollama - ~10 - 15 mins
+    - Ollama - ~10 - 15 mins or longer
   - Eesti Energia Annual Report 2023 ENG
     - OPENAI GPT-3.5 Turbo - ~6 - 7 mins
-    - Ollama - ~18 - 25 mins
+    - Ollama - ~18 - 25 mins or longer
+
+## Why these LLMs were used?
+
+### OpenAI API
+
+#### Pros
+
+- Performance speed: Fastiest and highest-quality AI for the fast project implementation.
+
+- Quality: Access to the very latest model improvements (GPT-4, GPT-3.5 Turbo, etc.) without any local maintenance.
+
+- Scalability: Pay per token, your local machine’s specs don’t matter.
+
+#### Cons
+
+- Online-only: Requires a live internet connection and a valid API key.
+
+- Cost: Billed by usage.
+
+- Data Privacy: Your documents must be sent to OpenAI’s servers, if you have sensitive data, that may be undesirable. ✅ This project used open-source data.
+
+### Ollama
+
+#### Pros
+
+- Offline Capability: Once a model (e.g. Mistral) is pulled locally, no internet is needed. Good choice for privacy-sensitive environments.
+
+- Zero API Cost: You pay only in disk space (≈2 GB for Mistral plus ≈4 GB for the default Hugging Face embeddings), and CPU/GPU cycles on your own hardware.
+
+- Control: You can swap in any compatible .gguf or LLaMA-format model, fine-tune it, or run proprietary in-house models.
+
+#### Cons
+
+- Speed: Local inference is generally 10× to 100× slower than a managed GPU API. Summarizing 100 pages can take several minutes.
+
+- Setup Overhead: Users must install Ollama (or a similar runtime), pull down multi-GB model files, and have at least 8–16 GB of RAM.
+
+- Model Updates: You’re responsible for updating and maintaining the model binaries yourself.
 
 ## Further Improvements & Limitations
 
@@ -145,7 +183,7 @@ This AI-powered document analyzer provides a solid foundation, but there are sev
 
 #### Multi-Document Support and Cross-Analysis
 
-- Allow users to upload multiple PDFs for comparison, merging, or cross-referencing.
+- Allow users to upload multiple PDFs for comparison.
 - Generate summaries per file and then aggregate them to enable broader document analysis.
 
 #### Sensitive Data Support
@@ -153,7 +191,7 @@ This AI-powered document analyzer provides a solid foundation, but there are sev
 As the tool currently stores files locally, it is not suitable for handling confidential data. Improvements may include:
 
 - In-memory-only processing
-- Local LLMs with no internet access
+- Local LLMs with no internet access (for example further improve Ollama implementation)
 - File encryption
 - On-premise deployment via Docker
 
