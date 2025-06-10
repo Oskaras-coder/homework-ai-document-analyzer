@@ -4,7 +4,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 import os
 from langchain_ollama import ChatOllama  # Local model: Mistral
-from langchain_community.chat_models import ChatOpenAI
 
 from utils.constants import HUGGINGFACE_MODEL_NAME
 
