@@ -18,7 +18,7 @@ This project allows you to upload and analyze long PDF documents using either Op
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ai-document-analyzer.git
+git https://github.com/Oskaras-coder/homework-ai-document-analyzer.git
 cd ai-document-analyzer
 ```
 
