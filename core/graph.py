@@ -6,10 +6,11 @@ from nodes.qa import qa_node
 
 
 class GraphState(TypedDict):
-    docs: List[Document]     # List of LangChain Documents (split & processed PDF chunks)
-    retriever: any           # Retriever object created from vector store: FAISS
-    summary: str             # Summary output (returned by summarize_node)
-    qa: Dict[str, str]       # Dictionary of Q&A results (returned by qa_node)
+    docs: List[Document]  # List of LangChain Documents (split & processed PDF chunks)
+    retriever: any  # Retriever object created from vector store: FAISS
+    summary: str  # Summary output (returned by summarize_node)
+    qa: Dict[str, str]  # Dictionary of Q&A results (returned by qa_node)
+
 
 # Controls the sequence of nodes (steps) for document processing
 def build_graph():
@@ -25,5 +26,6 @@ def build_graph():
     builder.set_finish_point("qa_node")
 
     return builder.compile()
+
 
 # LangGraph enables state passing between steps, so each node only needs to focus on its own logic.
